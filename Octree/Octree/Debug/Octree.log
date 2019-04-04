@@ -1,0 +1,26 @@
+﻿  Source.cpp
+c:\users\anthony\desktop\octree\octree\octree.cpp(134): warning C4018: '<': signed/unsigned mismatch
+  c:\users\anthony\desktop\octree\octree\octree.cpp(101): note: while compiling class template member function 'void Octree<int>::draw(Octree<int> *)'
+  c:\users\anthony\desktop\octree\octree\source.cpp(70): note: see reference to function template instantiation 'void Octree<int>::draw(Octree<int> *)' being compiled
+  c:\users\anthony\desktop\octree\octree\source.cpp(70): note: see reference to class template instantiation 'Octree<int>' being compiled
+c:\users\anthony\desktop\octree\octree\octree.cpp(139): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\octree\octree\octree.cpp(59): warning C4018: '<=': signed/unsigned mismatch
+  c:\users\anthony\desktop\octree\octree\octree.cpp(55): note: while compiling class template member function 'void Octree<int>::divide_tree(Octree<int> *,int)'
+  c:\users\anthony\desktop\octree\octree\octree.cpp(51): note: see reference to function template instantiation 'void Octree<int>::divide_tree(Octree<int> *,int)' being compiled
+  c:\users\anthony\desktop\octree\octree\octree.cpp(49): note: while compiling class template member function 'void Octree<int>::insert(point<T> *)'
+          with
+          [
+              T=int
+          ]
+  c:\users\anthony\desktop\octree\octree\octree.cpp(148): note: see reference to function template instantiation 'void Octree<int>::insert(point<T> *)' being compiled
+          with
+          [
+              T=int
+          ]
+  c:\users\anthony\desktop\octree\octree\octree.cpp(45): note: while compiling class template member function 'Octree<int>::Octree(double,double,double,double)'
+  c:\users\anthony\desktop\octree\octree\source.cpp(111): note: see reference to function template instantiation 'Octree<int>::Octree(double,double,double,double)' being compiled
+c:\users\anthony\desktop\octree\octree\octree.cpp(61): warning C4018: '<': signed/unsigned mismatch
+  Octree.cpp
+  Generating Code...
+  Octree.vcxproj -> C:\Users\Anthony\Desktop\Octree\Debug\Octree.exe
+  Octree.vcxproj -> C:\Users\Anthony\Desktop\Octree\Debug\Octree.pdb (Partial PDB)
