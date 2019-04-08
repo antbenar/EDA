@@ -56,7 +56,25 @@ void idle() { // AGREGAR ESTA FUNCION
 }
 
 //funcion llamada a cada imagen
-void glPaint(void) {
+void glPaint_Octree(void) {
+
+	//El fondo de la escena al color initial
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //CAMBIO
+	glLoadIdentity();
+	gluPerspective(45.0, 1.0, 1.0, 500.0);
+
+	glTranslatef(0, 0, -100.0);
+	glRotatef(ax, 0, 1, 0);
+	glRotatef(ay, 1, 0, 0);
+
+	octree->draw(octree);
+
+	//doble buffer, mantener esta instruccion al fin de la funcion
+	glutSwapBuffers();
+}
+
+//funcion llamada a cada imagen
+void glPaint_kdtree(void) {
 
 	//El fondo de la escena al color initial
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //CAMBIO
@@ -103,17 +121,9 @@ GLvoid window_key(unsigned char key, int x, int y) {
 	}
 
 }
-//
-//el programa principal
-//
-int main(int argc, char** argv) {
-	
-	octree = new Octree<int>(0,0,0,30);
-	octree->generate_points(10);
-	//octree->print(octree,0);
 
+void create_window_Octree() {
 	//Inicializacion de la GLUT
-	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(600, 600); //tamaño de la ventana
 	glutInitWindowPosition(100, 100); //posicion de la ventana
@@ -121,14 +131,44 @@ int main(int argc, char** argv) {
 
 	init_GL(); //funcion de inicializacion de OpenGL
 
-	glutDisplayFunc(glPaint);
+	glutDisplayFunc(glPaint_Octree);
 	glutReshapeFunc(&window_redraw);
 	// Callback del teclado
 	glutKeyboardFunc(&window_key);
 	glutMouseFunc(&OnMouseClick);
 	glutMotionFunc(&OnMouseMotion);
 	glutIdleFunc(&idle);
+}
 
+void create_window_kdtree() {
+	//Inicializacion de la GLUT
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitWindowSize(600, 600); //tamaño de la ventana
+	glutInitWindowPosition(720, 100); //posicion de la ventana
+	glutCreateWindow("kdTree"); //titulo de la ventana
+
+	init_GL(); //funcion de inicializacion de OpenGL
+
+	glutDisplayFunc(glPaint_kdtree);
+	glutReshapeFunc(&window_redraw);
+	// Callback del teclado
+	glutKeyboardFunc(&window_key);
+	glutMouseFunc(&OnMouseClick);
+	glutMotionFunc(&OnMouseMotion);
+	glutIdleFunc(&idle);
+}
+//
+//el programa principal
+//
+int main(int argc, char** argv) {
+	
+	octree = new Octree<int>(0,0,0,30);
+	octree->generate_points(100);
+	//octree->print(octree,0);
+
+	glutInit(&argc, argv);
+	create_window_Octree();
+	create_window_kdtree();
 
 	//qt = new quadTree();
 	glutMainLoop(); //bucle de rendering
