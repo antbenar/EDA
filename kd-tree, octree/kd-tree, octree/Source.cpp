@@ -4,6 +4,8 @@
 #include <math.h>
 #include<GL/glut.h>
 #include <time.h>       
+#include <fstream>
+#include <string>
 
 #include "Octree.cpp"
 #include "kd-tree.cpp"
@@ -152,7 +154,7 @@ void create_window_kdtree() {
 	//Inicializacion de la GLUT
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(600, 600); //tamaño de la ventana
-	glutInitWindowPosition(720, 100); //posicion de la ventana
+	glutInitWindowPosition(710, 100); //posicion de la ventana
 	glutCreateWindow("kdTree"); //titulo de la ventana
 
 	init_GL(); //funcion de inicializacion de OpenGL
@@ -172,19 +174,22 @@ void create_window_kdtree() {
 template <typename T>
 vector<point<T>*> generate_points(int max_size_point, int num_points) {
 	vector<point<T>*> result;
+	//srand(time(NULL));
 	for (int i = 0; i < num_points; ++i) {
 		vector<double> pt = { (double)(rand() % max_size_point * 2 - max_size_point), (double)(rand() % max_size_point * 2 - max_size_point), (double)(rand() % max_size_point * 2 - max_size_point) };
 		result.push_back(new point<T>(pt));
+		//cout << "x: "<< pt[0] << ", y: " << pt[1] << ", z: " << pt[2] << endl;
 	}
 	return result;
 }
 
-void octree_against_kdtree(int max_size, int number_points) {
+void octree_against_kdtree_insert(int max_size, int number_points) {
 	vector<point<int>*> points = generate_points<int>(max_size, number_points);
 	octree->points = points;
 	kdtree->points = points;
 	
 	clock_t t;
+	
 	cout << "Number of points: " << number_points << endl;
 	t = clock();
 		octree->divide_tree(octree);
@@ -195,30 +200,113 @@ void octree_against_kdtree(int max_size, int number_points) {
 		kdtree->divide_tree(kdtree);
 	t = clock() - t;
 	cout << "Time to divide Kd-tree: " << ((float)t) / CLOCKS_PER_SEC << endl;
+}
+
+
+template <typename T>
+vector<point<T>*> read_from_image(string file, double scale) {
+	char c;
+	string aux;
+	double x, y, z;
+	vector<point<T>*> result;
+
+	ifstream ifs(file.c_str(), ifstream::in);
+	c = ifs.get();
+	while (c != '#') {
+		if (c == 'v') {
+			aux = "";
+			c = ifs.get();//read blank space
+			while ((c = ifs.get()) != ' ') {
+				aux += c;
+			}
+			x = atof(aux.c_str());
+
+			aux = "";
+			while ((c = ifs.get()) != ' ') {
+				aux += c;
+			}
+			y = atof(aux.c_str());
+
+			aux = "";
+			while ((c = ifs.get()) != 'v' && c != '#') {
+				aux += c;
+			}
+			z = atof(aux.c_str());
+			vector<double> pt = { x*scale, y*scale , z*scale };
+			result.push_back(new point<T>(pt));
+		}
+		else c = ifs.get();
+	}
+	return result;
+}
+
+void insert_from_file(string file, double percent , double scale, vector<point<int>*> image) {
+	vector<point<int>*> points(image.begin(), image.begin() + image.size()*percent);
+	octree->points = points;
+	kdtree->points = points;
+
+	clock_t t;
+
+	cout << "Number of points: " << points.size() << endl;
+	t = clock();
+	octree->divide_tree(octree);
+	t = clock() - t;
+	cout << "Time to divide Octree: " << ((float)t) / CLOCKS_PER_SEC << endl;
+
+	t = clock();
+	kdtree->divide_tree(kdtree);
+	t = clock() - t;
+	cout << "Time to divide Kd-tree: " << ((float)t) / CLOCKS_PER_SEC << endl;
+}
+
+
+
+void octree_against_kdtree_search_point(int max_size, int number_iterations, vector<point<int>*> points) {
+	//vector<point<int>*> points = generate_points<int>(max_size, number_iterations);
+
+	clock_t t;
+	cout << "Number of searched points: " << number_iterations << endl;
 	
+	t = clock();
+	for (int i = 0; i < points.size(); ++i)
+		octree->search_point(points[i]);
+	t = clock() - t;
+	cout << "Time average to search in Octree: " << ((float)t/(float)number_iterations) / CLOCKS_PER_SEC << endl;
+	
+	t = clock();
+	for (int i = 0; i < points.size(); ++i) 
+		kdtree->search_point(points[i]);
+	t = clock() - t;
+	cout << "Time average to search in Kd-tree: " << ((float)t / (float)number_iterations) / CLOCKS_PER_SEC << endl;
 	
 }
 
-int main(int argc, char** argv) {
-	int number_points = 5;
-	int max_size = 30; // de -30 a 30 en cada dimension
-	
-	octree = new Octree<int>(0,0,0, max_size);
-	kdtree = new Kdtree<int>(max_size);
-	
-	/*
-	for (long long int i = 10000; i <= 100000; i = i + 10000) {
-		octree_against_kdtree(max_size, i);
+void compare(string file, int max_size, int num_searchs, double scale) {
+	for (int i = 1; i <= 4; ++i) {
+		octree = new Octree<int>(0, 0, 0, max_size);
+		kdtree = new Kdtree<int>(max_size);
+
+		vector<point<int>*> image = read_from_image<int>(file, scale);
+		//max_points = 0.15*image.size();
+		insert_from_file(file, 0.25*i, scale, image);
+
+		vector<point<int>*> points_to_compare_search = generate_points<int>(max_size, num_searchs);
+		octree_against_kdtree_search_point(max_size, num_searchs, points_to_compare_search);
 	}
-	*/
-	
+}
 
+
+
+vector<string> name_images = { "airboat", "cessna", "minicooper" , "skyscraper", "trumpet" }; //scale factor: 2,1,
+
+int main(int argc, char** argv) {
+	int num_searchs = 100000;
+	int max_size = 30; // de -30 a 30 en cada dimension
+
+	compare("objects/" + name_images[0] + ".obj", max_size, num_searchs, 2);
+	
 	glutInit(&argc, argv);
-	
-	//octree->generate_points(number_points);
-	//create_window_Octree();
-
-	kdtree->generate_points(max_size, number_points);
+	create_window_Octree();
 	create_window_kdtree();
 
 	glutMainLoop(); //bucle de rendering //no escribir nada abajo de mainloop

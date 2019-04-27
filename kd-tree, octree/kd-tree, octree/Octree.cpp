@@ -27,8 +27,7 @@ private:
 	double half_size_cube;
 	bool dividido;
 
-	
-	
+	Octree<T>* search_cuadrante(Octree<T>*, point<T>*);
 public:
 	/********/
 	vector < point<T>* > points;
@@ -37,6 +36,7 @@ public:
 	Octree(double, double, double, double);
 
 	void insert(point<T>*);
+	bool search_point(point<T>*);
 	void print(Octree<T>*, int);
 	void draw(Octree<T>*);
 	void generate_points(int);
@@ -52,13 +52,42 @@ void Octree<T>::insert(point<T>* pt) {
 	points.push_back(pt);
 	divide_tree(this);
 }
-/*
+
 template <typename T>
-void Octree<T>::search_cuadrante(Octree<T>* cur_cuadrante, point<T>* pt) {
+Octree<T>* Octree<T>::search_cuadrante(Octree<T>* cur_cuadrante, point<T>* pt) {
 
+	if (!cur_cuadrante->dividido) {
+		return cur_cuadrante;
+	}
+
+	int pos_cuadrante = 0;
+	if ( pt->dim[0] > cur_cuadrante->mid_x)  pos_cuadrante += 1;
+	if ( pt->dim[1] < cur_cuadrante->mid_y)  pos_cuadrante += 2;
+	if ( pt->dim[2] < cur_cuadrante->mid_z)  pos_cuadrante += 4;
+
+	if ( !(cur_cuadrante->cuadrantes)[pos_cuadrante] ) return nullptr;
+	return search_cuadrante((cur_cuadrante->cuadrantes)[pos_cuadrante], pt);
 }
-*/
 
+template <typename T>
+bool Octree<T>::search_point(point<T>*pt) {
+	bool equal = true;
+	Octree<T>* cur_cuadrante = search_cuadrante(this, pt);
+	if (!cur_cuadrante) return false;
+
+	for (int i = 0; i < cur_cuadrante->points.size(); ++i) {
+		equal = true;
+		for (int j = 0; j < 3; ++j) {
+			if (cur_cuadrante->points[i]->dim[j] != pt->dim[j]) {
+				equal = false;
+				break;
+			}
+		}
+		if (equal) return true;
+	}
+
+	return false;
+}
 template <typename T>
 void Octree<T>::divide_tree(Octree<T>* cur_cuadrante) {
 	if (!cur_cuadrante) return;

@@ -1,28 +1,54 @@
 ﻿  Source.cpp
-c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\octree.cpp(66): warning C4018: '<=': signed/unsigned mismatch
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\octree.cpp(63): note: while compiling class template member function 'void Octree<int>::divide_tree(Octree<int> *)'
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\source.cpp(190): note: see reference to function template instantiation 'void Octree<int>::divide_tree(Octree<int> *)' being compiled
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\source.cpp(76): note: see reference to class template instantiation 'Octree<int>' being compiled
-c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\octree.cpp(68): warning C4018: '<': signed/unsigned mismatch
-c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\octree.cpp(141): warning C4018: '<': signed/unsigned mismatch
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\octree.cpp(108): note: while compiling class template member function 'void Octree<int>::draw(Octree<int> *)'
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\source.cpp(76): note: see reference to function template instantiation 'void Octree<int>::draw(Octree<int> *)' being compiled
-c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\octree.cpp(146): warning C4018: '<': signed/unsigned mismatch
-c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\kd-tree.cpp(103): warning C4018: '<=': signed/unsigned mismatch
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\kd-tree.cpp(102): note: while compiling class template member function 'void Kdtree<int>::divide_tree(Kdtree<int> *)'
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\source.cpp(195): note: see reference to function template instantiation 'void Kdtree<int>::divide_tree(Kdtree<int> *)' being compiled
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\source.cpp(94): note: see reference to class template instantiation 'Kdtree<int>' being compiled
-c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\kd-tree.cpp(247): warning C4018: '<': signed/unsigned mismatch
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\kd-tree.cpp(204): note: while compiling class template member function 'void Kdtree<int>::draw(Kdtree<int> *,int)'
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\source.cpp(94): note: see reference to function template instantiation 'void Kdtree<int>::draw(Kdtree<int> *,int)' being compiled
-c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\kd-tree.cpp(94): warning C4018: '<': signed/unsigned mismatch
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\kd-tree.cpp(114): note: see reference to function template instantiation 'std::vector<line<T> *,std::allocator<_Ty>> copy_lines<T>(std::vector<_Ty,std::allocator<_Ty>>)' being compiled
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(46): warning C4812: obsolete declaration style: please use 'Kdtree<T>::~Kdtree' instead
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(271): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(277): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\octree.cpp(95): warning C4018: '<=': signed/unsigned mismatch
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\octree.cpp(92): note: while compiling class template member function 'void Octree<int>::divide_tree(Octree<int> *)'
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(195): note: see reference to function template instantiation 'void Octree<int>::divide_tree(Octree<int> *)' being compiled
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(78): note: see reference to class template instantiation 'Octree<int>' being compiled
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\octree.cpp(97): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\octree.cpp(78): warning C4018: '<': signed/unsigned mismatch
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\octree.cpp(73): note: while compiling class template member function 'bool Octree<int>::search_point(point<T> *)'
+          with
+          [
+              T=int
+          ]
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(272): note: see reference to function template instantiation 'bool Octree<int>::search_point(point<T> *)' being compiled
+          with
+          [
+              T=int
+          ]
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\octree.cpp(170): warning C4018: '<': signed/unsigned mismatch
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\octree.cpp(137): note: while compiling class template member function 'void Octree<int>::draw(Octree<int> *)'
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(78): note: see reference to function template instantiation 'void Octree<int>::draw(Octree<int> *)' being compiled
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\octree.cpp(175): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(137): warning C4018: '<=': signed/unsigned mismatch
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(136): note: while compiling class template member function 'void Kdtree<int>::divide_tree(Kdtree<int> *)'
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(200): note: see reference to function template instantiation 'void Kdtree<int>::divide_tree(Kdtree<int> *)' being compiled
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(96): note: see reference to class template instantiation 'Kdtree<int>' being compiled
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(107): warning C4018: '<': signed/unsigned mismatch
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(99): note: while compiling class template member function 'bool Kdtree<int>::search_point(point<T> *)'
+          with
+          [
+              T=int
+          ]
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(278): note: see reference to function template instantiation 'bool Kdtree<int>::search_point(point<T> *)' being compiled
+          with
+          [
+              T=int
+          ]
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(109): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(280): warning C4018: '<': signed/unsigned mismatch
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(179): note: while compiling class template member function 'void Kdtree<int>::draw(Kdtree<int> *,int)'
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(96): note: see reference to function template instantiation 'void Kdtree<int>::draw(Kdtree<int> *,int)' being compiled
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(128): warning C4018: '<': signed/unsigned mismatch
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(149): note: see reference to function template instantiation 'std::vector<line<T> *,std::allocator<_Ty>> copy_lines<T>(std::vector<_Ty,std::allocator<_Ty>>)' being compiled
           with
           [
               T=int,
               _Ty=line<int> *
           ]
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\kd-tree.cpp(102): note: while compiling class template member function 'void Kdtree<int>::divide_tree(Kdtree<int> *)'
-  c:\users\anthony\desktop\kd-tree, octree\kd-tree, octree\source.cpp(195): note: see reference to function template instantiation 'void Kdtree<int>::divide_tree(Kdtree<int> *)' being compiled
-  kd-tree, octree.vcxproj -> C:\Users\Anthony\Desktop\kd-tree, octree\Debug\kd-tree, octree.exe
-  kd-tree, octree.vcxproj -> C:\Users\Anthony\Desktop\kd-tree, octree\Debug\kd-tree, octree.pdb (Partial PDB)
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(136): note: while compiling class template member function 'void Kdtree<int>::divide_tree(Kdtree<int> *)'
+  c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\source.cpp(200): note: see reference to function template instantiation 'void Kdtree<int>::divide_tree(Kdtree<int> *)' being compiled
+  kd-tree, octree.vcxproj -> C:\Users\Anthony\Desktop\EDA\kd-tree, octree\Debug\kd-tree, octree.exe
+  kd-tree, octree.vcxproj -> C:\Users\Anthony\Desktop\EDA\kd-tree, octree\Debug\kd-tree, octree.pdb (Partial PDB)

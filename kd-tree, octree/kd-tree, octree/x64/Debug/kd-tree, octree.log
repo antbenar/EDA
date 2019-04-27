@@ -1,0 +1,8 @@
+﻿  Source.cpp
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(47): warning C4812: obsolete declaration style: please use 'Kdtree<T>::~Kdtree' instead
+  point.cpp
+  Octree.cpp
+  kd-tree.cpp
+c:\users\anthony\desktop\eda\kd-tree, octree\kd-tree, octree\kd-tree.cpp(47): warning C4812: obsolete declaration style: please use 'Kdtree<T>::~Kdtree' instead
+  Generating Code...
+LINK : fatal error LNK1104: cannot open file 'glut32.lib'

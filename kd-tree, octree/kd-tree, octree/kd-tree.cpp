@@ -11,11 +11,9 @@ template <typename T>
 class Kdtree {
 private:
 	vector<line<T>*> lines;
-	
 	bool dividido;
 	int deep;
 
-	void draw_rectangle(point<T>*, double, double, double);
 	Kdtree<T>* search_cuadrante(Kdtree<T>*, point<T>*);
 
 	struct Compare {
@@ -27,22 +25,31 @@ private:
 	Compare compare;
 
 public:
-	Kdtree(double);
-	Kdtree(vector<line<T>*> , int);
-	/********/
+	/*****this must be in private***/
 	vector < point<T>* > points;
 	Kdtree<T>* left;
 	Kdtree<T>* right;
 
 	void divide_tree(Kdtree<T>*);
 	/********/
-	void insert(point<T>*);
 
+	Kdtree(double);
+	Kdtree(vector<line<T>*>, int);
+	void insert(point<T>*);
+	bool search_point(point<T>*pt);
 	void draw(Kdtree<T>*, int color = 255);
 	void generate_points(int, int);
+	~Kdtree<T>();
 };
 
-
+template <typename T>
+Kdtree<T>::~Kdtree<T>()
+{
+	if ( left ) {
+		delete left;
+		delete right;
+	}
+}
 
 template <typename T>
 Kdtree<T>::Kdtree(vector<line<T>*> lines_ , int deep_):	lines(lines_),
@@ -89,6 +96,33 @@ Kdtree<T>* Kdtree<T>::search_cuadrante(Kdtree<T>* current, point<T>*pt) {
 }
 
 template <typename T>
+bool Kdtree<T>::search_point(point<T>*pt) {
+	bool equal = true;
+	Kdtree<T>* cur_cuadrante = search_cuadrante(this, pt);
+	
+	//draw(cur_cuadrante, 200);
+	//cout << "cuadrante: " << cur_cuadrante->lines[0]->p_inicio->dim[0] << " " << cur_cuadrante->lines[0]->p_inicio->dim[1] << " " << cur_cuadrante->lines[0]->p_inicio->dim[2] << endl;
+
+
+	for (int i = 0; i < cur_cuadrante->points.size(); ++i) {
+		equal = true;
+		for (int j = 0; j < cur_cuadrante->points[i]->dim.size(); ++j) {
+			if (cur_cuadrante->points[i]->dim[j] != pt->dim[j]) {
+				equal = false;
+				break;
+			}
+		}
+		if (equal) return true;
+	}
+	
+	return false;
+}
+
+
+
+
+
+template <typename T>
 vector < line<T>* > copy_lines( vector < line<T>* > lines) {
 	vector < line<T>* > lines_aux(lines.size(),nullptr);
 	for (int i = 0; i < lines.size(); ++i) {
@@ -110,11 +144,13 @@ void Kdtree<T>::divide_tree(Kdtree<T>* cur_cuadrante) {
 	point<T>* median_point = cur_cuadrante->points[(int)(cur_cuadrante->points.size() / 2)];
 	double cur_value_dim = median_point->dim[dim];
 
+	//cout << "median in " << dim << " is: " << cur_value_dim  << endl;
 	//--------------------------------------------cuadrante left
 	vector < line<T>* > lines_aux = copy_lines(cur_cuadrante->lines);
 	lines_aux[dim]->p_fin->dim[dim] = cur_value_dim;
 
-	cur_cuadrante->left = new Kdtree<T>(lines_aux, cur_cuadrante->deep + 1);
+	if (!cur_cuadrante->left)
+		cur_cuadrante->left = new Kdtree<T>(lines_aux, cur_cuadrante->deep + 1);
 	cur_cuadrante->left->points.insert(cur_cuadrante->left->points.begin(), cur_cuadrante->points.begin(), cur_cuadrante->points.begin() + (int)(cur_cuadrante->points.size() / 2));
 
 	//--------------------------------------------cuadrante right
@@ -128,7 +164,8 @@ void Kdtree<T>::divide_tree(Kdtree<T>* cur_cuadrante) {
 			lines_aux[i]->p_fin->dim[dim] = cur_value_dim;
 	}
 
-	cur_cuadrante->right = new Kdtree<T>(lines_aux, cur_cuadrante->deep + 1);
+	if (!cur_cuadrante->right)
+		cur_cuadrante->right = new Kdtree<T>(lines_aux, cur_cuadrante->deep + 1);
 	cur_cuadrante->right->points.insert(cur_cuadrante->right->points.begin(), cur_cuadrante->points.begin() + (int)(cur_cuadrante->points.size() / 2), cur_cuadrante->points.end() );
 
 	(cur_cuadrante->points).clear();
@@ -139,103 +176,99 @@ void Kdtree<T>::divide_tree(Kdtree<T>* cur_cuadrante) {
 }
 
 template <typename T>
-void Kdtree<T>::draw_rectangle(point<T>* origen, double largo, double alto, double ancho) {
-	double x = origen->dim[0];
-	double y = origen->dim[1];
-	double z = origen->dim[2];
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glColor3d(255, 255, 255);
-
-	glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
-									  // Define vertices in counter-clockwise (CCW) order with normal pointing out
-		
-		//glLoadIdentity();
-
-		glPushMatrix();
-
-			//glTranslatef(x, y, z);
-
-			// Top face(y = 1.0f)
-			glVertex3d(0, 0, 0);
-			glVertex3d(largo, 0, 0);
-			glVertex3d(largo, 0, -ancho);
-			glVertex3d(0, 0, -ancho);
-
-			// Bottom face (y = -1.0f)
-			glVertex3d(0, -alto, 0);
-			glVertex3d(largo, -alto, 0);
-			glVertex3d(largo, -alto, -ancho);
-			glVertex3d(0, -alto, -ancho);
-
-			// Front face  (z = 1.0f)
-			glVertex3d(0, 0, 0);
-			glVertex3d(0, -alto, 0);
-			glVertex3d(largo, -alto, 0);
-			glVertex3d(largo, 0, 0);
-
-		glPopMatrix();
-
-		
-		/*
-		
-		// Back face (z = -1.0f)
-		glVertex3f(1.0f, -1.0f, -1.0f);
-		glVertex3f(-1.0f, -1.0f, -1.0f);
-		glVertex3f(-1.0f, 1.0f, -1.0f);
-		glVertex3f(1.0f, 1.0f, -1.0f);
-
-		// Left face (x = -1.0f)
-		glVertex3f(-1.0f, 1.0f, 1.0f);
-		glVertex3f(-1.0f, 1.0f, -1.0f);
-		glVertex3f(-1.0f, -1.0f, -1.0f);
-		glVertex3f(-1.0f, -1.0f, 1.0f);
-
-		// Right face (x = 1.0f)
-		glVertex3f(1.0f, 1.0f, -1.0f);
-		glVertex3f(1.0f, 1.0f, 1.0f);
-		glVertex3f(1.0f, -1.0f, 1.0f);
-		glVertex3f(1.0f, -1.0f, -1.0f);
-		*/
-	glEnd();
-}
-
-template <typename T>
 void Kdtree<T>::draw(Kdtree<T>* cur_cuadrante, int color = 255) {
 	if (!cur_cuadrante) return;
-	//graphic lines
-	double largo = cur_cuadrante->lines[0]->p_fin->dim[0] - cur_cuadrante->lines[0]->p_inicio->dim[0];
-	double alto = cur_cuadrante->lines[1]->p_inicio->dim[1] - cur_cuadrante->lines[1]->p_fin->dim[1];
-	double ancho = cur_cuadrante->lines[2]->p_inicio->dim[2] - cur_cuadrante->lines[2]->p_fin->dim[2];
 
-	//draw_rectangle(cur_cuadrante->lines[0]->p_inicio, largo, alto, ancho);
-
-	
 	glBegin(GL_LINES);
-	glColor3d(255, 255, 255);
-	//x
-	glVertex3d(cur_cuadrante->lines[0]->p_inicio->dim[0], cur_cuadrante->lines[0]->p_inicio->dim[1], cur_cuadrante->lines[0]->p_inicio->dim[2]);
-	glVertex3d(cur_cuadrante->lines[0]->p_fin->dim[0], cur_cuadrante->lines[0]->p_fin->dim[1], cur_cuadrante->lines[0]->p_fin->dim[2]);
+	if (color == 200) glColor3d(255, 0, 0);
+	else glColor3d(255, 255, 255);
+	
+	double x_min = cur_cuadrante->lines[0]->p_inicio->dim[0];
+	double x_max = cur_cuadrante->lines[0]->p_fin->dim[0];
 
-	//y
-	glVertex3d(cur_cuadrante->lines[1]->p_inicio->dim[0], cur_cuadrante->lines[1]->p_inicio->dim[1], cur_cuadrante->lines[1]->p_inicio->dim[2]);
-	glVertex3d(cur_cuadrante->lines[1]->p_fin->dim[0], cur_cuadrante->lines[1]->p_fin->dim[1], cur_cuadrante->lines[1]->p_fin->dim[2]);
+	double y_min = cur_cuadrante->lines[1]->p_inicio->dim[1];
+	double y_max = cur_cuadrante->lines[1]->p_fin->dim[1];
 
-	//z
-	glVertex3d(cur_cuadrante->lines[2]->p_inicio->dim[0], cur_cuadrante->lines[2]->p_inicio->dim[1], cur_cuadrante->lines[2]->p_inicio->dim[2]);
-	glVertex3d(cur_cuadrante->lines[2]->p_fin->dim[0], cur_cuadrante->lines[2]->p_fin->dim[1], cur_cuadrante->lines[2]->p_fin->dim[2]);
-
+	double z_min = cur_cuadrante->lines[2]->p_inicio->dim[2];
+	double z_max = cur_cuadrante->lines[2]->p_fin->dim[2];
 
 	//----------------cara de arriba
-	//x
-	/*
-	glVertex3d(cur_cuadrante->lines[0]->p_inicio->dim[0], cur_cuadrante->lines[0]->p_inicio->dim[1], cur_cuadrante->lines[0]->p_inicio->dim[2]);
-	glVertex3d(cur_cuadrante->lines[0]->p_fin->dim[0], cur_cuadrante->lines[0]->p_fin->dim[1], cur_cuadrante->lines[0]->p_fin->dim[2]);
+	glVertex3d(x_min, y_min , z_min);
+	glVertex3d(x_max, y_min, z_min);
 
-	glVertex3d(cur_cuadrante->lines[0]->p_inicio->dim[0], cur_cuadrante->lines[0]->p_inicio->dim[1], cur_cuadrante->lines[0]->p_inicio->dim[2]);
-	glVertex3d(cur_cuadrante->lines[0]->p_fin->dim[0], cur_cuadrante->lines[0]->p_fin->dim[1], cur_cuadrante->lines[0]->p_fin->dim[2]);
-	*/
+	glVertex3d(x_max, y_min, z_min);
+	glVertex3d(x_max, y_min, z_max);
 
+	glVertex3d(x_max, y_min, z_max);
+	glVertex3d(x_min, y_min, z_max);
+
+	glVertex3d(x_min, y_min, z_min);
+	glVertex3d(x_min, y_min, z_max);
+
+	//----------------cara de abajo
+	glVertex3d(x_min, y_max, z_min);
+	glVertex3d(x_max, y_max, z_min);
+
+	glVertex3d(x_max, y_max, z_min);
+	glVertex3d(x_max, y_max, z_max);
+
+	glVertex3d(x_max, y_max, z_max);
+	glVertex3d(x_min, y_max, z_max);
+
+	glVertex3d(x_min, y_max, z_min);
+	glVertex3d(x_min, y_max, z_max);
+
+	//----------------cara de frente
+	glVertex3d(x_min, y_min, z_min);
+	glVertex3d(x_min, y_max, z_min);
+
+	glVertex3d(x_min, y_max, z_min);
+	glVertex3d(x_max, y_max, z_min);
+
+	glVertex3d(x_max, y_max, z_min);
+	glVertex3d(x_max, y_min, z_min);
+
+	glVertex3d(x_max, y_min, z_min);
+	glVertex3d(x_min, y_min, z_min);
+
+	//----------------cara de atras
+	glVertex3d(x_min, y_min, z_max);
+	glVertex3d(x_min, y_max, z_max);
+
+	glVertex3d(x_min, y_max, z_max);
+	glVertex3d(x_max, y_max, z_max);
+
+	glVertex3d(x_max, y_max, z_max);
+	glVertex3d(x_max, y_min, z_max);
+
+	glVertex3d(x_max, y_min, z_max);
+	glVertex3d(x_min, y_min, z_max);
+
+	//----------------cara lateral izquierda
+	glVertex3d(x_min, y_min, z_min);
+	glVertex3d(x_min, y_min, z_max);
+	
+	glVertex3d(x_min, y_min, z_max);
+	glVertex3d(x_min, y_max, z_max);
+
+	glVertex3d(x_min, y_max, z_max);
+	glVertex3d(x_min, y_max, z_min);
+	
+	glVertex3d(x_min, y_max, z_min);
+	glVertex3d(x_min, y_min, z_min);
+
+	//----------------cara lateral derecha
+	glVertex3d(x_max, y_min, z_min);
+	glVertex3d(x_max, y_min, z_max);
+
+	glVertex3d(x_max, y_min, z_max);
+	glVertex3d(x_max, y_max, z_max);
+
+	glVertex3d(x_max, y_max, z_max);
+	glVertex3d(x_max, y_max, z_min);
+
+	glVertex3d(x_max, y_max, z_min);
+	glVertex3d(x_max, y_min, z_min);
 
 	glEnd();
 	
