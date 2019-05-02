@@ -99,7 +99,7 @@ template <typename T>
 bool Kdtree<T>::search_point(point<T>*pt) {
 	bool equal = true;
 	Kdtree<T>* cur_cuadrante = search_cuadrante(this, pt);
-	
+	if (!cur_cuadrante) return false;
 	//draw(cur_cuadrante, 200);
 	//cout << "cuadrante: " << cur_cuadrante->lines[0]->p_inicio->dim[0] << " " << cur_cuadrante->lines[0]->p_inicio->dim[1] << " " << cur_cuadrante->lines[0]->p_inicio->dim[2] << endl;
 

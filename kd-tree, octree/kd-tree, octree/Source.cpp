@@ -6,6 +6,7 @@
 #include <time.h>       
 #include <fstream>
 #include <string>
+#include <chrono>
 
 #include "Octree.cpp"
 #include "kd-tree.cpp"
@@ -245,18 +246,24 @@ void insert_from_file(string file, double percent , double scale, vector<point<i
 	octree->points = points;
 	kdtree->points = points;
 
-	clock_t t;
-
 	cout << "Number of points: " << points.size() << endl;
-	t = clock();
-	octree->divide_tree(octree);
-	t = clock() - t;
-	cout << "Time to divide Octree: " << ((float)t) / CLOCKS_PER_SEC << endl;
+	
+	auto start = chrono::steady_clock::now();
 
-	t = clock();
+	octree->divide_tree(octree);
+
+	auto end = chrono::steady_clock::now();
+	auto diff = end - start;
+	cout << "Time to divide Octree: " << chrono::duration <double, milli>(diff).count() << endl;
+
+
+	start = chrono::steady_clock::now();
+
 	kdtree->divide_tree(kdtree);
-	t = clock() - t;
-	cout << "Time to divide Kd-tree: " << ((float)t) / CLOCKS_PER_SEC << endl;
+
+	end = chrono::steady_clock::now();
+	diff = end - start;
+	cout << "Time to divide Kd-tree: " << chrono::duration <double, milli>(diff).count() << endl;
 }
 
 
@@ -264,30 +271,37 @@ void insert_from_file(string file, double percent , double scale, vector<point<i
 void octree_against_kdtree_search_point(int max_size, int number_iterations, vector<point<int>*> points) {
 	//vector<point<int>*> points = generate_points<int>(max_size, number_iterations);
 
-	clock_t t;
 	cout << "Number of searched points: " << number_iterations << endl;
 	
-	t = clock();
+	auto start = chrono::steady_clock::now();
+
 	for (int i = 0; i < points.size(); ++i)
 		octree->search_point(points[i]);
-	t = clock() - t;
-	cout << "Time average to search in Octree: " << ((float)t/(float)number_iterations) / CLOCKS_PER_SEC << endl;
-	
-	t = clock();
+
+	auto end = chrono::steady_clock::now();
+	auto diff = end - start;
+	cout << "Time average to search in Octree: " << (chrono::duration <double, milli>(diff).count() / (double)number_iterations) << endl;
+
+	/*
+	start = chrono::steady_clock::now();
 	for (int i = 0; i < points.size(); ++i) 
 		kdtree->search_point(points[i]);
-	t = clock() - t;
-	cout << "Time average to search in Kd-tree: " << ((float)t / (float)number_iterations) / CLOCKS_PER_SEC << endl;
-	
+	end = chrono::steady_clock::now();
+	diff = end - start;
+	cout << "Time average to search in Kd-tree: " << (chrono::duration <double, milli>(diff).count() / (double)number_iterations)  << endl;
+	*/
+
 }
 
 void compare(string file, int max_size, int num_searchs, double scale) {
 	for (int i = 1; i <= 4; ++i) {
+		vector<point<int>*> image = read_from_image<int>(file, scale);
+		max_points = 0.05*image.size();
+
 		octree = new Octree<int>(0, 0, 0, max_size);
 		kdtree = new Kdtree<int>(max_size);
 
-		vector<point<int>*> image = read_from_image<int>(file, scale);
-		//max_points = 0.15*image.size();
+		cout << "-- percent of image -> " << 0.25*i << endl;
 		insert_from_file(file, 0.25*i, scale, image);
 
 		vector<point<int>*> points_to_compare_search = generate_points<int>(max_size, num_searchs);
@@ -297,18 +311,31 @@ void compare(string file, int max_size, int num_searchs, double scale) {
 
 
 
-vector<string> name_images = { "airboat", "cessna", "minicooper" , "skyscraper", "trumpet" }; //scale factor: 2,1,
+vector<string> name_images = { "airboat", "cessna", "minicooper" , "skyscraper", "trumpet", "bunny" }; //scale factor: 2, 1 , 0.25 , 0.75 , 0.05, 6
 
 int main(int argc, char** argv) {
 	int num_searchs = 100000;
 	int max_size = 30; // de -30 a 30 en cada dimension
-
-	compare("objects/" + name_images[0] + ".obj", max_size, num_searchs, 2);
 	
+	//----------functions to compare
+	max_points = 20;
+	compare("objects/" + name_images[5] + ".obj", max_size, num_searchs, 6);
+	/*
+	//code to draw an image
+	octree = new Octree<int>(0, 0, 0, max_size);
+	kdtree = new Kdtree<int>(max_size);
+	vector<point<int>*> image = read_from_image<int>("objects/" + name_images[5] + ".obj", 9);
+	max_points = 0.05*image.size();
+	octree->points = image;
+	kdtree->points = image;
+	octree->divide_tree(octree);
+	kdtree->divide_tree(kdtree);
+	*/
+
 	glutInit(&argc, argv);
 	create_window_Octree();
 	create_window_kdtree();
-
+		
 	glutMainLoop(); //bucle de rendering //no escribir nada abajo de mainloop
 	
 	system("pause");

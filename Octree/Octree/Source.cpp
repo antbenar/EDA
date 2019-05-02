@@ -19,8 +19,10 @@ float ay = 0.0;
 float speed = 0.1;
 
 Octree <int>* octree;
+int esferaX = 0, esferaY = 0, esferaZ = 0, esferaR = 10;
+float esferaspeed = 2;
 
-bool r = false;
+bool r = false, drawSphere= false;
 
 void OnMouseClick(int button, int state, int x, int y)
 {
@@ -67,26 +69,12 @@ void glPaint_Octree(void) {
 	glRotatef(ax, 0, 1, 0);
 	glRotatef(ay, 1, 0, 0);
 
-	octree->draw(octree);
+	if (drawSphere)	//pinta puntos dentro del radio(color verde)
+		octree->drawSphere(esferaX, esferaY, esferaZ, esferaR);
 
-	//doble buffer, mantener esta instruccion al fin de la funcion
-	glutSwapBuffers();
-}
-
-//funcion llamada a cada imagen
-void glPaint_kdtree(void) {
-
-	//El fondo de la escena al color initial
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //CAMBIO
-	glLoadIdentity();
-	gluPerspective(45.0, 1.0, 1.0, 500.0);
-
-	glTranslatef(0, 0, -100.0);
-	glRotatef(ax, 0, 1, 0);
-	glRotatef(ay, 1, 0, 0);
-
-	octree->draw(octree);
-
+	octree->draw(octree);	//pinta puntos y linea divisoras del cuadrante(color verde)
+	
+	
 	//doble buffer, mantener esta instruccion al fin de la funcion
 	glutSwapBuffers();
 }
@@ -110,18 +98,37 @@ GLvoid window_redraw(GLsizei width, GLsizei height) {
 	glLoadIdentity();
 }
 
-GLvoid window_key(unsigned char key, int x, int y) {
+void window_key_glut(int key, int x, int y) {
 	switch (key) {
-	case KEY_ESC:
-		exit(0);
+	case GLUT_KEY_UP:
+		if (esferaY <= 30) esferaY += esferaspeed;
 		break;
 
+	case GLUT_KEY_DOWN:
+		if (esferaY >= -30) esferaY -= esferaspeed;
+		break;
+
+	case GLUT_KEY_RIGHT:
+		if (esferaX <= 30) esferaX += esferaspeed;
+		break;
+
+	case GLUT_KEY_LEFT:
+		if (esferaX >= -30) esferaX -= esferaspeed;
+		break;
+	case GLUT_KEY_PAGE_UP:
+		if (esferaZ <= 30) esferaZ += esferaspeed;
+		break;
+	case GLUT_KEY_PAGE_DOWN:
+		if (esferaZ >= -30) esferaZ -= esferaspeed;
+		break;
+	case GLUT_KEY_HOME:
+		drawSphere = !drawSphere;
+		break;
 	default:
 		break;
 	}
-
+	//glutPostRedisplay();
 }
-
 void create_window_Octree() {
 	//Inicializacion de la GLUT
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
@@ -133,44 +140,23 @@ void create_window_Octree() {
 
 	glutDisplayFunc(glPaint_Octree);
 	glutReshapeFunc(&window_redraw);
-	// Callback del teclado
-	glutKeyboardFunc(&window_key);
+	glutSpecialFunc(&window_key_glut);
 	glutMouseFunc(&OnMouseClick);
 	glutMotionFunc(&OnMouseMotion);
 	glutIdleFunc(&idle);
 }
 
-void create_window_kdtree() {
-	//Inicializacion de la GLUT
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(600, 600); //tamaño de la ventana
-	glutInitWindowPosition(720, 100); //posicion de la ventana
-	glutCreateWindow("kdTree"); //titulo de la ventana
-
-	init_GL(); //funcion de inicializacion de OpenGL
-
-	glutDisplayFunc(glPaint_kdtree);
-	glutReshapeFunc(&window_redraw);
-	// Callback del teclado
-	glutKeyboardFunc(&window_key);
-	glutMouseFunc(&OnMouseClick);
-	glutMotionFunc(&OnMouseMotion);
-	glutIdleFunc(&idle);
-}
 //
 //el programa principal
 //
 int main(int argc, char** argv) {
-	
+	int num_points = 10;
 	octree = new Octree<int>(0,0,0,30);
-	octree->generate_points(100);
-	//octree->print(octree,0);
+	octree->generate_points(num_points);
 
 	glutInit(&argc, argv);
 	create_window_Octree();
-	create_window_kdtree();
 
-	//qt = new quadTree();
 	glutMainLoop(); //bucle de rendering
 					//no escribir nada abajo de mainloop
 	return 0;
