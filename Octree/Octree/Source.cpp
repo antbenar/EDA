@@ -18,6 +18,7 @@ float ax = 0.0;
 float ay = 0.0;
 float speed = 0.1;
 
+int max_points = 100;
 Octree <int>* octree;
 int esferaX = 0, esferaY = 0, esferaZ = 0, esferaR = 10;
 float esferaspeed = 2;
@@ -150,7 +151,7 @@ void create_window_Octree() {
 //el programa principal
 //
 int main(int argc, char** argv) {
-	int num_points = 10;
+	int num_points = 50000;
 	octree = new Octree<int>(0,0,0,30);
 	octree->generate_points(num_points);
 

@@ -7,7 +7,7 @@
 #include "point.cpp"
 using namespace std;
 
-static int max_points = 1;
+
 static vector< vector<double> > mult_size = {
 	{ -1,  1,  1 },
 	{ 1,  1,  1 },
@@ -108,16 +108,16 @@ void Octree<T>::draw(Octree<T>* cur_cuadrante) {
 	double mid_x_ = cur_cuadrante->mid_x;
 	double mid_y_ = cur_cuadrante->mid_y;
 	double mid_z_ = cur_cuadrante->mid_z;
-	
+	/*
 	glPushMatrix();
  	    glColor3d(255, 255, 255);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glTranslatef(mid_x_, mid_y_, mid_z_);
 		glutSolidCube(cur_cuadrante->half_size_cube*2);
 	glPopMatrix();
-	
+	*/
 	//graphic points
-	glPointSize(5);
+	glPointSize(2);
 	glBegin(GL_POINTS);
 		glColor3d(0, 255, 0);
 		for (int i = 0; i < (cur_cuadrante->points).size(); ++i) {
@@ -192,6 +192,7 @@ void Octree<T>::drawSphere(int x, int y, int z, int radius) {
 	//-----------graphic sphere
 	glPushMatrix();
 		glColor3d(255, 255, 0);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glTranslatef(x, y, z);
 		glutSolidSphere(radius, 15, 15);
 	glPopMatrix();
@@ -199,7 +200,7 @@ void Octree<T>::drawSphere(int x, int y, int z, int radius) {
 	//--------------------graphic points
 	vector<point<T>*> points_to_color = rangeSearch(this, x, y, z, radius);
 	
-	glPointSize(8);
+	glPointSize(5);
 	glBegin(GL_POINTS);
 		glColor3d(255, 0, 0);
 		for (int i = 0; i < points_to_color.size(); ++i) {

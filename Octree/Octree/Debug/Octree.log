@@ -1,12 +1,12 @@
 ﻿  Source.cpp
 c:\users\anthony\desktop\eda\octree\octree\octree.cpp(123): warning C4018: '<': signed/unsigned mismatch
   c:\users\anthony\desktop\eda\octree\octree\octree.cpp(106): note: while compiling class template member function 'void Octree<int>::draw(Octree<int> *)'
-  c:\users\anthony\desktop\eda\octree\octree\source.cpp(75): note: see reference to function template instantiation 'void Octree<int>::draw(Octree<int> *)' being compiled
-  c:\users\anthony\desktop\eda\octree\octree\source.cpp(73): note: see reference to class template instantiation 'Octree<int>' being compiled
+  c:\users\anthony\desktop\eda\octree\octree\source.cpp(76): note: see reference to function template instantiation 'void Octree<int>::draw(Octree<int> *)' being compiled
+  c:\users\anthony\desktop\eda\octree\octree\source.cpp(74): note: see reference to class template instantiation 'Octree<int>' being compiled
 c:\users\anthony\desktop\eda\octree\octree\octree.cpp(128): warning C4018: '<': signed/unsigned mismatch
-c:\users\anthony\desktop\eda\octree\octree\octree.cpp(205): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\octree\octree\octree.cpp(206): warning C4018: '<': signed/unsigned mismatch
   c:\users\anthony\desktop\eda\octree\octree\octree.cpp(191): note: while compiling class template member function 'void Octree<int>::drawSphere(int,int,int,int)'
-  c:\users\anthony\desktop\eda\octree\octree\source.cpp(73): note: see reference to function template instantiation 'void Octree<int>::drawSphere(int,int,int,int)' being compiled
+  c:\users\anthony\desktop\eda\octree\octree\source.cpp(74): note: see reference to function template instantiation 'void Octree<int>::drawSphere(int,int,int,int)' being compiled
 c:\users\anthony\desktop\eda\octree\octree\octree.cpp(172): warning C4018: '<': signed/unsigned mismatch
   c:\users\anthony\desktop\eda\octree\octree\octree.cpp(164): note: while compiling class template member function 'std::vector<point<T> *,std::allocator<_Ty>> Octree<T>::rangeSearch(Octree<T> *,int,int,int,int)'
           with
@@ -14,14 +14,14 @@ c:\users\anthony\desktop\eda\octree\octree\octree.cpp(172): warning C4018: '<': 
               T=int,
               _Ty=point<int> *
           ]
-  c:\users\anthony\desktop\eda\octree\octree\octree.cpp(200): note: see reference to function template instantiation 'std::vector<point<T> *,std::allocator<_Ty>> Octree<T>::rangeSearch(Octree<T> *,int,int,int,int)' being compiled
+  c:\users\anthony\desktop\eda\octree\octree\octree.cpp(201): note: see reference to function template instantiation 'std::vector<point<T> *,std::allocator<_Ty>> Octree<T>::rangeSearch(Octree<T> *,int,int,int,int)' being compiled
           with
           [
               T=int,
               _Ty=point<int> *
           ]
   c:\users\anthony\desktop\eda\octree\octree\octree.cpp(50): note: while compiling class template member function 'Octree<int>::Octree(double,double,double,double)'
-  c:\users\anthony\desktop\eda\octree\octree\source.cpp(154): note: see reference to function template instantiation 'Octree<int>::Octree(double,double,double,double)' being compiled
+  c:\users\anthony\desktop\eda\octree\octree\source.cpp(155): note: see reference to function template instantiation 'Octree<int>::Octree(double,double,double,double)' being compiled
 c:\users\anthony\desktop\eda\octree\octree\octree.cpp(64): warning C4018: '<=': signed/unsigned mismatch
   c:\users\anthony\desktop\eda\octree\octree\octree.cpp(60): note: while compiling class template member function 'void Octree<int>::divide_tree(Octree<int> *,int)'
   c:\users\anthony\desktop\eda\octree\octree\octree.cpp(56): note: see reference to function template instantiation 'void Octree<int>::divide_tree(Octree<int> *,int)' being compiled
@@ -31,7 +31,7 @@ c:\users\anthony\desktop\eda\octree\octree\octree.cpp(64): warning C4018: '<=': 
               T=int,
               _Ty=point<int> *
           ]
-  c:\users\anthony\desktop\eda\octree\octree\octree.cpp(200): note: see reference to function template instantiation 'std::vector<point<T> *,std::allocator<_Ty>> Octree<T>::rangeSearch(Octree<T> *,int,int,int,int)' being compiled
+  c:\users\anthony\desktop\eda\octree\octree\octree.cpp(201): note: see reference to function template instantiation 'std::vector<point<T> *,std::allocator<_Ty>> Octree<T>::rangeSearch(Octree<T> *,int,int,int,int)' being compiled
           with
           [
               T=int,
