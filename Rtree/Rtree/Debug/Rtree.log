@@ -1,0 +1,50 @@
+﻿  main.cpp
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(47): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(61): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(65): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(79): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(87): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(97): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(98): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(109): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(121): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(122): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(133): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(134): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(145): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(148): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rtree.cpp(137): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rtree.cpp(233): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rtree.cpp(238): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\main.cpp(67): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\main.cpp(68): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\main.cpp(85): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\utility(200): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(18): note: see reference to function template instantiation 'std::pair<float,float>::pair<double,double,void,0>(std::pair<double,double> &&) noexcept' being compiled
+  c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(18): note: see reference to function template instantiation 'std::pair<float,float>::pair<double,double,void,0>(std::pair<double,double> &&) noexcept' being compiled
+  Rtree.cpp
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(47): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(61): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(65): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(79): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(87): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(97): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(98): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(109): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(121): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(122): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(133): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(134): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(145): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(148): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rtree.cpp(137): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rtree.cpp(233): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\rtree\rtree\rtree.cpp(238): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\utility(200): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(18): note: see reference to function template instantiation 'std::pair<float,float>::pair<double,double,void,0>(std::pair<double,double> &&) noexcept' being compiled
+  c:\users\anthony\desktop\rtree\rtree\rectangle.cpp(18): note: see reference to function template instantiation 'std::pair<float,float>::pair<double,double,void,0>(std::pair<double,double> &&) noexcept' being compiled
+  Generating Code...
+  Rtree.vcxproj -> C:\Users\Anthony\Desktop\Rtree\Debug\Rtree.exe
+  Rtree.vcxproj -> C:\Users\Anthony\Desktop\Rtree\Debug\Rtree.pdb (Partial PDB)
