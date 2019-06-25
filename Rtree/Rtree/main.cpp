@@ -5,6 +5,21 @@ using namespace std;
 
 Rtree* rtree;
 
+int mx = 0;
+int my = 0;
+
+float ax = 0.0;
+float ay = 0.0;
+float speed = 0.1;
+
+int max_points = 100;
+float esferaX = 0.5, esferaY = 0.5, esferaR = 0.2;
+float esferaspeed = 0.1;
+
+bool drawSphere = false;
+vector<point*> points;
+
+
 //funcion llamada a cada imagen
 void glPaint(void) {
 	//El fondo de la escena al color initial
@@ -13,6 +28,10 @@ void glPaint(void) {
 	glOrtho(-0.1, 1.1, -0.1, 1.1, -1, 1);
 
 	rtree->draw();
+	
+	if (drawSphere)	//pinta puntos dentro del radio(color verde)
+		rtree->drawSphere(esferaX, esferaY, esferaR);
+		//drawSphere_(esferaX, esferaY, esferaR);
 
 	//doble buffer, mantener esta instruccion al fin de la funcion
 	glutSwapBuffers();
@@ -34,6 +53,32 @@ void idle() { // AGREGAR ESTA FUNCION
 	glutPostRedisplay();
 }
 
+void window_key_glut(int key, int x, int y) {
+	switch (key) {
+	case GLUT_KEY_UP:
+		if (esferaY <= 1) esferaY += esferaspeed;
+		break;
+
+	case GLUT_KEY_DOWN:
+		if (esferaY >= -1) esferaY -= esferaspeed;
+		break;
+
+	case GLUT_KEY_RIGHT:
+		if (esferaX <= 1) esferaX += esferaspeed;
+		break;
+
+	case GLUT_KEY_LEFT:
+		if (esferaX >= -1) esferaX -= esferaspeed;
+		break;
+	case GLUT_KEY_HOME:
+		drawSphere = !drawSphere;
+		break;
+	default:
+		break;
+	}
+	//glutPostRedisplay();
+}
+
 void create_window() {
 	//Inicializacion de la GLUT
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
@@ -45,6 +90,7 @@ void create_window() {
 
 	glutDisplayFunc(glPaint);
 	glutReshapeFunc(&window_redraw);
+	glutSpecialFunc(&window_key_glut);
 	// Callback del teclado
 	glutIdleFunc(&idle);
 }
@@ -72,21 +118,20 @@ void show_points(vector<point*> points) {	//imprimir puntos normalizados entre 0
 }
 
 int main(int argc, char** argv) {
-	int num_points = 100000;
-	int room = 50;
+	int num_points = 20;
+	int room = 5;
 	int num_dimension = 2;
 	
-
-	vector<point*> points = generate_points(num_points, num_dimension);
+	points = generate_points(num_points, num_dimension);
 	//show_points(points);
 
 	rtree = new Rtree(room);
+	//rtree->create(points);
 	
 	for (int i = 0; i < points.size() ; ++i) {
 		rtree->insert(points[i]);
 	}
-	cout << rtree->root->containers.size() << endl;;
-	cout << "num_points: " << rtree->root->numPoints() << endl;
+	
 
 	glutInit(&argc, argv);
 	create_window();

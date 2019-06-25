@@ -1,0 +1,33 @@
+﻿  main.cpp
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(47): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(61): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(65): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(79): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(87): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(97): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(98): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(109): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(121): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(122): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(133): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(134): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(153): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(156): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rtree.cpp(160): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rtree.cpp(256): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rtree.cpp(261): warning C4018: '<': signed/unsigned mismatch
+c:\users\anthony\desktop\eda\rtree\rtree\Rtree.cpp(325): warning C4018: '<': signed/unsigned mismatch
+main.cpp(113): warning C4018: '<': signed/unsigned mismatch
+main.cpp(114): warning C4018: '<': signed/unsigned mismatch
+main.cpp(131): warning C4018: '<': signed/unsigned mismatch
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(200): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(18): note: see reference to function template instantiation 'std::pair<float,float>::pair<double,double,void,0>(std::pair<double,double> &&) noexcept' being compiled
+  c:\users\anthony\desktop\eda\rtree\rtree\Rectangle.cpp(18): note: see reference to function template instantiation 'std::pair<float,float>::pair<double,double,void,0>(std::pair<double,double> &&) noexcept' being compiled
+  Generating code
+  8 of 456 functions ( 1.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Rtree.vcxproj -> C:\Users\Anthony\Desktop\EDA\Rtree\Release\Rtree.exe
+  Rtree.vcxproj -> C:\Users\Anthony\Desktop\EDA\Rtree\Release\Rtree.pdb (Full PDB)

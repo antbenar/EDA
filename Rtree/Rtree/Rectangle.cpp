@@ -118,7 +118,7 @@ public:
 		int i = containers.size();
 		containers.insert(containers.end(), r.begin(), r.end());
 
-		for (; i < points.size(); ++i) {
+		for (; i < containers.size(); ++i) {
 			for (int j = 0; j < vertexes.size(); ++j) {
 				if (containers[i]->vertexes[j].second > vertexes[j].second)
 					vertexes[j].second = containers[i]->vertexes[j].second;
@@ -138,6 +138,14 @@ public:
 					vertexes[j].first = containers[i]->vertexes[j].first;
 			}
 		}
+	}
+
+	bool intersect(float x, float y, float radius) {
+		if (vertexes[0].second <= x - radius) return false;
+		if (vertexes[0].first >= x + radius) return false;
+		if (vertexes[1].second <= y - radius) return false;
+		if (vertexes[1].first >= y + radius) return false;
+		return true;
 	}
 
 	~Rectangle()
